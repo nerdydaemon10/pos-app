@@ -1,0 +1,44 @@
+<div class="flex flex-col items-center justify-center h-full select-none">
+  <div class="flex flex-col gap-4">
+    <div>
+      <h1 class="text-3xl text-gray-700 font-bold mb-1">Login</h1>
+      <p class="text-sm text-gray-500">Login your account to continue.</p>
+    </div>
+    @if (auth.isLoginError()) {
+      <p-message severity="error">
+        <span class="text-sm font-medium">
+          <span>
+            <i class="ri-error-warning-line"></i>
+          </span>
+          {{ login.message }}
+        </span>
+      </p-message>
+    }
+    <form class="w-full flex flex-col gap-2" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="flex flex-col gap-2">
+        <label for="username" class="text-sm text-gray-700">Username</label>
+        <input 
+          pInputText 
+          inputId="username" 
+          placeholder="nerdydaemon10" 
+          formControlName="username"
+        />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label for="password" class="text-sm text-gray-700">Password</label>
+        <p-password 
+          inputId="password" 
+          [toggleMask]="true" 
+          feedback="false" 
+          placeholder="******" 
+          formControlName="password" 
+        />
+      </div>
+      <div class="flex flex-row items-center gap-2 mb-2">
+        <p-checkbox inputId="keepMeLoggedIn" formControlName="keepMeLoggedIn" [binary]="true" />
+        <label class="text-sm text-gray-700" for="keepMeLoggedIn">Keep me logged in</label>
+      </div>
+      <p-button type="submit" label="Login" styleClass="w-full" [loading]="login.loading" />
+    </form>
+  </div>
+</div>

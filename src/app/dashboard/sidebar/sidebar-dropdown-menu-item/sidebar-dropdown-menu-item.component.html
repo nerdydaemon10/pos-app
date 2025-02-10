@@ -1,0 +1,55 @@
+<li class="px-4 cursor-pointer">
+  <div 
+    (click)="hasSubItems ? toggle() : null"
+    [class]="{
+      'text-blue-300': !isOpen,
+      'text-white': isOpen,
+    }"
+    class="flex flex-row justify-between items-center py-2 text-sm font-medium group hover:text-white"
+  >
+    <div class="flex flex-row items-center gap-2">
+      <div 
+        [class]="{
+          'bg-blue-300': !isOpen,
+          'bg-white': isOpen
+        }"
+        class="size-1 rounded bg-blue-300 group-hover:bg-white"
+      ></div>
+      {{ name }}
+    </div>
+    @if (hasSubItems) {
+      <div 
+        [class]="{
+          'text-blue-300': !isOpen,
+          'text-white': isOpen,
+          'rotate-0': !isOpen,
+          'rotate-180': isOpen,
+          'ease-in': !isOpen,
+          'ease-out': isOpen
+        }"
+        class="text-blue-300 group-hover:text-white transition duration-300"
+      >
+        <i class='bx bxs-chevron-down'></i>
+      </div>
+    }
+  </div>
+  <ul 
+    [class]="{
+      'max-h-[0px]': !isOpen,
+      'max-h-[500px]': isOpen,
+      'ease-out': !isOpen,
+      'ease-in': isOpen
+    }"
+    class="overflow-hidden transition-[max-height] duration-300"
+  >
+    @if (hasSubItems) {
+      @for (subitem of subitems; track subitem) {
+        <app-sidebar-dropdown-menu-item
+          [name]="subitem.name"
+          [path]="subitem.path"
+          [subitems]="subitem.subitems ?? []"
+        ></app-sidebar-dropdown-menu-item>
+      }
+    }
+  </ul>
+</li>

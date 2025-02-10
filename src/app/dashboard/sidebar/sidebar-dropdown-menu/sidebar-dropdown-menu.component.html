@@ -1,0 +1,53 @@
+<div>
+  <!-- header -->
+  <div 
+    pRipple
+    (click)="toggle()"
+    [class]="{ 
+      'text-blue-100': !isOpen,
+      'text-white': isOpen,
+    }"
+    class="flex flex-row justify-between items-center px-4 py-1 text-sm font-medium hover:text-white cursor-pointer"
+  >
+    <div class="flex flex-row items-center gap-2">
+      <span class="text-lg relative top-[1px]">
+        <i 
+          [class]="'bx' + ( isOpen ? 's-' : '-' ) + icon"
+          class="bx"
+        ></i>
+      </span>
+      <span>{{ name }}</span>
+    </div>
+    <div 
+      [class]="{
+        'rotate-0': !isOpen,
+        'rotate-180': isOpen,
+        'ease-in': !isOpen,
+        'ease-out': isOpen,
+      }"
+      class="transition duration-300"
+    >
+      <i class='bx bxs-chevron-down'></i>
+    </div>
+  </div>
+  <!-- main -->
+  @if (hasItems) {
+    <ul 
+      [class]="{
+        'max-h-[0px]': !isOpen,
+        'max-h-[500px]': isOpen,
+        'ease-out': !isOpen,
+        'ease-in': isOpen
+      }"
+      class="ps-3 overflow-hidden transition-[max-height] duration-300"
+    >
+      @for (item of items; track item) {
+        <app-sidebar-dropdown-menu-item
+          [name]="item.name"
+          [path]="item.path"
+          [subitems]="item.subitems ?? []"
+        ></app-sidebar-dropdown-menu-item>
+      }
+    </ul>
+  }
+</div>

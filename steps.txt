@@ -1,0 +1,149 @@
+1. Creating new project using:
+
+"ng new <project-name>"
+
+------------------------------
+
+2. Installing PrimeNG: 
+
+"npm install primeng @primeng/themes"
+
+------------------------------
+
+3. Setting-up PrimeNG and it's Theme 'Aura' in app.config.ts
+
+export const appConfig: ApplicationConfig = {
+    providers: [
+        ...,
+        provideAnimationsAsync(),
+        providePrimeNG({
+            theme: {
+                preset: Aura
+            }
+        })
+    ]
+};
+
+------------------------------
+
+4. Install Tailwind CSS from PrimeNG Documentation
+
+"npm install tailwindcss-primeui"
+
+------------------------------
+
+5. Create tailwind config file using:
+
+"npx tailwindcss init"
+
+------------------------------
+
+6. require "tailwindcss-primeui" in tailwind.config.ts
+
+module.exports = {
+    // ...
+    plugins: [require('tailwindcss-primeui')]
+};
+
+------------------------------
+
+7. Add some css layers in app.config.ts:
+
+providePrimeNG({    
+    theme: {
+        preset: Aura,
+        options: {
+            cssLayer: {
+                name: 'primeng',
+                order: 'tailwind-base, primeng, tailwind-utilities'
+            }
+        }
+    }
+})
+
+------------------------------
+
+8. Add some css layers in styles.css
+
+@layer tailwind-base, primeng, tailwind-utilities;
+
+@layer tailwind-base {
+    @tailwind base;
+}
+
+@layer tailwind-utilities {
+    @tailwind components;
+    @tailwind utilities;
+}
+
+------------------------------
+
+9. Update the content inside tailwind.config.js
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{html,js}"],
+  ...
+}
+
+------------------------------
+
+10. Add some ripple effects for some components like buttons
+    in app.config.ts
+
+providePrimeNG({
+    ripple: true,
+    ...
+})
+
+------------------------------
+
+11. Install luxon for date utility:
+
+npm install luxon
+npm install --save-dev @types/luxon
+
+------------------------------
+
+12. Install lodash for added utilities:
+
+npm install lodash
+npm install @types/lodash --save-dev
+
+------------------------------
+
+13. Analyze your bundle size by typing:
+
+ng build --stats-json
+
+------------------------------
+
+13. Install ngrx-store:
+
+ng add @ngrx/store@latest
+
+------------------------------
+
+14. Install ngrx-signals:
+
+ng add @ngrx/signals@latest
+
+------------------------------
+
+15. Install boxicons icons:
+
+npm install boxicons --save
+
+------------------------------
+
+16. Create different environment configs by:
+
+ng generate environments
+
+------------------------------
+
+17. Install immer for modifying states of immutable state.
+
+npm i immer
+
+------------------------------
